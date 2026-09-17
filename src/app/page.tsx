@@ -253,9 +253,8 @@ export default function Home() {
       <div className={`min-h-screen flex flex-col font-sans ${bg} ${tx} transition-colors duration-300`}>
         {/* Header Movil */}
         <header className={`h-16 shrink-0 ${navBg} border-b-[3px] ${border} flex items-center justify-between px-5 z-20`}>
-          <div className="flex items-center gap-2">
-            <img fetchPriority="high" src="/apaes.svg" alt="logo" className="w-8 h-8" />
-            <span className="text-xl text-white font-bowlby tracking-wider" style={{ WebkitTextStroke: "1px black" }}>aPAES</span>
+          <div className="flex items-center">
+            <span className="text-sm text-white font-black uppercase tracking-widest">Panel de estudio</span>
           </div>
           <div className="flex items-center gap-2">
             <SyncIndicator status={syncStatus} isOnline={isOnline} dark={dark} />
@@ -309,14 +308,8 @@ export default function Home() {
           <Menu size={36} strokeWidth={2.5} />
         </div>
 
-        {/* Logo */}
-        <div className={`flex flex-col items-center transition-all duration-300 ${isMenuOpen ? "opacity-100 mb-16" : "opacity-0 h-0 overflow-hidden mb-0 pointer-events-none"}`}>
-          <div className="w-[400px] h-[380px] mb-3">
-            <img fetchPriority="high" src="/apaes.svg" alt="aPAES logo" className="w-full h-full drop-shadow-md object-contain" />
-          </div>
-          <span className="text-[2.2rem] text-white tracking-widest text-center font-bowlby" style={{ WebkitTextStroke: "1.5px black", textShadow: "2px 2px 0 #000" }}>
-            aPAES
-          </span>
+        <div className={`flex items-center justify-center transition-all duration-300 ${isMenuOpen ? "opacity-100 mb-16" : "opacity-0 h-0 overflow-hidden mb-0 pointer-events-none"}`}>
+          <span className="text-center text-white text-sm font-black uppercase tracking-widest">Panel de estudio</span>
         </div>
         {/* Nav */}
         <div className="w-full px-3 flex flex-col gap-4">
@@ -374,7 +367,7 @@ export default function Home() {
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────��───
 // khe
 // ────────────────────────────────────────────────────────────────────────────
 function Card({ children, dark, className = "" }: { children: React.ReactNode; dark: boolean; className?: string }) {
@@ -396,12 +389,18 @@ function SectionCard({ title, children, dark }: { title: string; children?: Reac
 
 // ────────────────────────────────────────────────────────────────────────────
 // panel inicio
-// ────────────────────────────────────────────────────────────────────────────
+// ───────────────────────────────────────────────────────────��────────────────
 function InicioTab({ goals, results, dark, isMobile }: { goals: Goals; results: ExamResult[]; dark: boolean; isMobile: boolean }) {
   const tx = dark ? "text-slate-100" : "text-black";
   const sub = dark ? "text-slate-400" : "text-slate-600";
-  const history = results.slice(-8);
-  const maxScore = Math.max(...history.map(r => r.score), goals.puntajeDeseado, 100);
+  const history = results
+    .filter(r => Number.isFinite(Number(r.score)) && Number(r.score) >= 0)
+    .sort((a, b) => {
+      const dateDiff = new Date(a.date).getTime() - new Date(b.date).getTime();
+      return Number.isFinite(dateDiff) && dateDiff !== 0 ? dateDiff : a.id - b.id;
+    })
+    .slice(-8);
+  const maxScore = Math.max(...history.map(r => Number(r.score)), Number(goals.puntajeDeseado), 100);
 
   return (
     <div className="w-full flex flex-col gap-6 md:gap-8">
@@ -427,7 +426,7 @@ function InicioTab({ goals, results, dark, isMobile }: { goals: Goals; results: 
               {/* dashed goal line */}
               <div
                 className="absolute left-0 right-0 border-t-[2px] border-dashed border-emerald-400 z-20 pointer-events-none"
-                style={{ bottom: `${(goals.puntajeDeseado / maxScore) * 100}%` }}
+                style={{ bottom: `${Math.min(100, Math.max(0, (Number(goals.puntajeDeseado) / maxScore) * 100))}%` }}
                 title={`Meta: ${goals.puntajeDeseado}`}
               />
               {history.map((r, i) => {
