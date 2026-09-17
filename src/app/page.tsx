@@ -241,8 +241,8 @@ export default function Home() {
   }
 
   // theme helpers
-  const bg = dark ? "bg-[#0d0d18]" : "bg-[#ded9ed]";
-  const navBg = dark ? "bg-[#1a0f38]" : "bg-[#351b69]";
+  const bg = dark ? "bg-[var(--palette-dark-page)]" : "bg-[var(--palette-page)]";
+  const navBg = "bg-[var(--palette-nav)]";
   const tx = dark ? "text-slate-100" : "text-black";
   const border = dark ? "border-white/10" : "border-black";
 
@@ -286,7 +286,7 @@ export default function Home() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex flex-col items-center gap-1 transition-all ${active ? "text-white scale-110" : "text-white/50"}`}
               >
-                <div className={`p-2 rounded-xl transition-all ${active ? "bg-[#6c40d6] border-[2px] border-black shadow-[2px_2px_0_#000]" : ""}`}>
+                <div className={`p-2 rounded-xl transition-all ${active ? "bg-[var(--palette-accent)] border-[2px] border-black shadow-[2px_2px_0_#000]" : ""}`}>
                   <Icon size={24} strokeWidth={active ? 3 : 2} />
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-tighter">{tab.id}</span>
@@ -328,7 +328,7 @@ export default function Home() {
                 onClick={() => setActiveTab(tab.id)}
                 title={tab.id}
                 className={`w-full py-2.5 px-3 flex items-center ${isMenuOpen ? "justify-start" : "justify-center"} gap-3 text-lg font-extrabold border-[3px] border-black rounded transition-all text-white
-                  ${activeTab === tab.id ? "bg-[#6c40d6] translate-y-0.5" : "bg-[#5b3eb8] hover:-translate-y-0.5 hover:bg-[#6c40d6]"}`}
+                  ${activeTab === tab.id ? "bg-[var(--palette-accent)] translate-y-0.5" : "bg-[var(--palette-accent)] hover:-translate-y-0.5 hover:bg-[var(--palette-accent)]"}`}
               >
                 <Icon size={22} strokeWidth={2.5} className="shrink-0" />
                 {isMenuOpen && <span>{tab.id}</span>}
@@ -461,7 +461,7 @@ function InicioTab({ goals, results, dark, isMobile }: { goals: Goals; results: 
           ].map(s => (
             <Card key={s.label} dark={dark} className={`${isMobile ? "p-4" : "p-6"} text-center`}>
               <p className={`text-[10px] md:text-xs font-bold uppercase tracking-wider mb-1 md:mb-2 ${dark ? "text-slate-400" : "text-slate-500"}`}>{s.label}</p>
-              <p className={`${isMobile ? "text-2xl" : "text-4xl"} font-black ${dark ? "text-indigo-300" : "text-[#6c40d6]"}`}>{s.value}<span className="text-lg ml-1">{s.unit}</span></p>
+              <p className={`${isMobile ? "text-2xl" : "text-4xl"} font-black ${dark ? "text-indigo-300" : "text-[var(--palette-accent)]"}`}>{s.value}<span className="text-lg ml-1">{s.unit}</span></p>
             </Card>
           ))}
         </div>
@@ -583,7 +583,7 @@ function PracticarTab({ savedExams, sections, onStartExam, onAddClick, onAddSect
             }}
             className={`rounded-2xl border-[3px] transition-all duration-200 ${dark
               ? isOver ? "border-indigo-400 bg-[#1e1245]" : "bg-[#2a1a5e] border-white/10"
-              : isOver ? "border-[#6c40d6] bg-[#ede8f8]" : "bg-[#6136af] border-black"
+              : isOver ? "border-[var(--palette-accent)] bg-[#ede8f8]" : "bg-[#6136af] border-black"
               }`}
           >
             {/* Section header */}
@@ -600,8 +600,8 @@ function PracticarTab({ savedExams, sections, onStartExam, onAddClick, onAddSect
                     }}
                     autoFocus
                   />
-                  <button onClick={() => { onRenameSection(section.id, editingName); setEditingSectionId(null); }} className="text-emerald-400 font-black text-sm px-2 py-1 hover:bg-emerald-400/10 rounded">✓</button>
-                  <button onClick={() => setEditingSectionId(null)} className="text-rose-400 font-black text-sm px-2 py-1 hover:bg-rose-400/10 rounded">✕</button>
+<button aria-label="Guardar nombre" onClick={() => { onRenameSection(section.id, editingName); setEditingSectionId(null); }} className="text-emerald-400 font-black text-sm px-2 py-1 hover:bg-emerald-400/10 rounded">Guardar</button>
+      <button aria-label="Cancelar edición" onClick={() => setEditingSectionId(null)} className="text-rose-400 font-black text-sm px-2 py-1 hover:bg-rose-400/10 rounded">Cancelar</button>
                 </div>
               ) : (
                 <h2
@@ -664,9 +664,9 @@ function PracticarTab({ savedExams, sections, onStartExam, onAddClick, onAddSect
                       <div className={`absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full border border-black ${status.color} z-10`} title={status.label} />
                     )}
                     {exam.isGlobal && (
-                      <div className="absolute top-1.5 right-1.5 bg-[#6c40d6] text-white text-[8px] font-black px-1.5 rounded border border-black z-10">GLOBAL</div>
+                      <div className="absolute top-1.5 right-1.5 bg-[var(--palette-accent)] text-white text-[8px] font-black px-1.5 rounded border border-black z-10">GLOBAL</div>
                     )}
-                    <div className="flex justify-between items-center bg-[#298d5c] text-white px-2 py-0.5 rounded text-[10px] font-bold mb-2 border-2 border-black">
+                    <div className="flex justify-between items-center bg-[var(--palette-success)] text-white px-2 py-0.5 rounded text-[10px] font-bold mb-2 border-2 border-black">
                       <span>{exam.metadata?.año || "2024"}</span>
                       <span className="bg-white text-black px-1 rounded-sm text-[8px] uppercase">{exam.metadata?.asignatura?.substring(0, 3) || "GEN"}</span>
                     </div>
@@ -689,7 +689,7 @@ function PracticarTab({ savedExams, sections, onStartExam, onAddClick, onAddSect
                       </div>
                     )}
                     <div className="flex-1 mt-2 flex justify-center items-center">
-                      <Play size={28} className="opacity-20 group-hover:opacity-100 transition-opacity text-[#298d5c] fill-[#298d5c]" stroke="black" strokeWidth={3} />
+                      <Play size={28} className="opacity-20 group-hover:opacity-100 transition-opacity text-[var(--palette-success)] fill-[var(--palette-success)]" stroke="black" strokeWidth={3} />
                     </div>
                     <p className="text-center mt-auto text-[9px] font-bold pt-2 border-t-2 border-dashed border-black">{exam.data.length} preguntas</p>
                   </div>
@@ -702,7 +702,7 @@ function PracticarTab({ savedExams, sections, onStartExam, onAddClick, onAddSect
                   onClick={onAddClick}
                   className={`aspect-[3/4] border-[3px] border-dashed rounded-lg flex flex-col justify-center items-center cursor-pointer transition-transform hover:-translate-y-1 ${dark ? "bg-white/5 border-white/20 hover:bg-white/10" : "bg-white border-black hover:bg-[#f0edf9]"}`}
                 >
-                  <div className="w-14 h-14 bg-[#6c40d6] rounded-full border-[3px] border-black flex items-center justify-center text-white">
+                  <div className="w-14 h-14 bg-[var(--palette-accent)] rounded-full border-[3px] border-black flex items-center justify-center text-white">
                     <Plus size={28} strokeWidth={4} />
                   </div>
                   <span className={`font-extrabold text-[11px] text-center mt-2 ${dark ? "text-slate-300" : "text-black"}`}>Añadir Ensayo</span>
@@ -731,7 +731,7 @@ function PracticarTab({ savedExams, sections, onStartExam, onAddClick, onAddSect
             onKeyDown={e => { if (e.key === "Enter") handleAddSection(); if (e.key === "Escape") { setShowAddSection(false); setNewSectionName(""); } }}
             autoFocus
           />
-          <button onClick={handleAddSection} className="px-4 py-2 bg-[#6c40d6] text-white font-black text-sm border-[3px] border-black rounded-lg hover:bg-[#5b3eb8] transition-all">
+          <button onClick={handleAddSection} className="px-4 py-2 bg-[var(--palette-accent)] text-white font-black text-sm border-[3px] border-black rounded-lg hover:bg-[var(--palette-accent)] transition-all">
             Crear
           </button>
           <button onClick={() => { setShowAddSection(false); setNewSectionName(""); }} className={`px-3 py-2 font-bold text-sm border-2 rounded-lg ${dark ? "border-white/20 text-slate-400 hover:bg-white/10" : "border-black text-black hover:bg-black/5"}`}>
@@ -778,7 +778,7 @@ function PracticarTab({ savedExams, sections, onStartExam, onAddClick, onAddSect
                   closeCtxMenu();
                 }}
               >
-                <PenBox size={15} className={dark ? "text-indigo-400" : "text-[#6c40d6]"} />
+                <PenBox size={15} className={dark ? "text-indigo-400" : "text-[var(--palette-accent)]"} />
                 Renombrar
               </button>
               {/* Status */}
@@ -857,7 +857,7 @@ function ProgresoTab({ goals, results, onUpdateGoals, onDeleteResult, dark, isMo
 
       {/* ── Goals section ── */}
       <div className={cardCls}>
-        <h2 className="text-[1.8rem] font-black uppercase tracking-tighter text-[#6c40d6]" style={{ textShadow: "1px 1px 0 rgba(0,0,0,0.2)" }}>
+        <h2 className="text-[1.8rem] font-black uppercase tracking-tighter text-[var(--palette-accent)]" style={{ textShadow: "1px 1px 0 rgba(0,0,0,0.2)" }}>
           Mis Metas
         </h2>
 
@@ -883,7 +883,7 @@ function ProgresoTab({ goals, results, onUpdateGoals, onDeleteResult, dark, isMo
               return (
                 <button key={p.id} onClick={() => togglePrueba(p.id)}
                   className={`px-3 py-1.5 rounded-lg border-[3px] font-black text-sm transition-all
-                    ${sel ? "bg-[#6c40d6] border-[#6c40d6] text-white"
+                    ${sel ? "bg-[var(--palette-accent)] border-[var(--palette-accent)] text-white"
                       : dark ? "bg-white/5 border-white/20 text-slate-300 hover:border-indigo-400"
                         : "bg-[#f4f2f9] border-black text-black hover:bg-[#e2deef]"}`}
                 >
@@ -916,16 +916,16 @@ function ProgresoTab({ goals, results, onUpdateGoals, onDeleteResult, dark, isMo
 
         <button onClick={saveGoals}
           className={`self-start px-6 py-2 text-sm font-black border-[3px] rounded-lg transition-all active:translate-y-0.5 active:shadow-none
-            ${saved ? "bg-emerald-500 border-emerald-700 text-white" : "bg-[#298d5c] border-black text-white hover:bg-[#1a6640]"}`}
+            ${saved ? "bg-emerald-500 border-emerald-700 text-white" : "bg-[var(--palette-success)] border-black text-white hover:bg-[#1a6640]"}`}
         >
-          {saved ? "✓ Guardado!" : "Guardar Metas"}
+          {saved ? "Guardado!" : "Guardar Metas"}
         </button>
       </div>
 
       {/* ── Results table ── */}
       <div className={cardCls}>
         <div className="flex items-center justify-between flex-wrap gap-4">
-          <h2 className="text-[1.6rem] font-black uppercase tracking-tighter text-[#6c40d6]" style={{ textShadow: "1px 1px 0 rgba(0,0,0,0.2)" }}>
+          <h2 className="text-[1.6rem] font-black uppercase tracking-tighter text-[var(--palette-accent)]" style={{ textShadow: "1px 1px 0 rgba(0,0,0,0.2)" }}>
             Historial de Resultados
           </h2>
           <div className="flex items-center gap-2">
@@ -962,12 +962,12 @@ function ProgresoTab({ goals, results, onUpdateGoals, onDeleteResult, dark, isMo
                     className={`w-full flex items-center justify-between px-4 py-3 font-extrabold text-sm ${dark ? "bg-white/5 hover:bg-white/10 text-slate-200" : "bg-[#f4f2f9] hover:bg-[#e2deef] text-black"} transition-colors`}
                   >
                     <div className="flex items-center gap-3">
-                      <FolderOpen size={16} className={dark ? "text-indigo-400" : "text-[#6c40d6]"} />
+                      <FolderOpen size={16} className={dark ? "text-indigo-400" : "text-[var(--palette-accent)]"} />
                       <span>{groupName}</span>
                       <span className={`text-xs font-normal ${sub}`}>({items.length} ensayo{items.length !== 1 ? "s" : ""})</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${dark ? "bg-indigo-500/30 text-indigo-300" : "bg-[#e2deef] text-[#6c40d6]"}`}>
+                      <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${dark ? "bg-indigo-500/30 text-indigo-300" : "bg-[#e2deef] text-[var(--palette-accent)]"}`}>
                         Prom: {avg} pts
                       </span>
                       {isCollapsed ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
@@ -1036,7 +1036,7 @@ function ProgresoTab({ goals, results, onUpdateGoals, onDeleteResult, dark, isMo
                                           autoFocus
                                         />
                                         <button className="text-emerald-400 text-xs font-bold px-1"
-                                          onClick={() => { /* TODO: persist edit in parent if needed */ setEditingId(null); }}>✓</button>
+                                          onClick={() => { /* TODO: persist edit in parent if needed */ setEditingId(null); }}>Guardar</button>
                                       </div>
                                     ) : (
                                       <span className={`text-xs cursor-pointer hover:underline ${sub}`} onClick={() => { setEditingId(r.id); setEditGroup(r.group); }}>{r.group}</span>

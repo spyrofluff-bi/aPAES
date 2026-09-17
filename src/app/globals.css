@@ -8,6 +8,20 @@
   --font-bowlby: var(--font-bowlby);
 }
 
+/* Palette variables are randomized per entry by AuthGate. */
+:root {
+  --palette-page: #e8edf7;
+  --palette-dark-page: #111827;
+  --palette-nav: #243b66;
+  --palette-accent: #4f6fb5;
+  --palette-accent-dark: #89a7e8;
+  --palette-success: #277a62;
+}
+
+* {
+  border-radius: 0 !important;
+}
+
 /* Custom Scrollbar for better UI */
 ::-webkit-scrollbar {
   width: 8px;

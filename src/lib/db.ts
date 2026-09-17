@@ -20,7 +20,7 @@ if (!global._pgPool) {
       connectionString: cleaned,
       ssl: { rejectUnauthorized: false },
     });
-    global._pgPool.on('connect', () => log('Connected ✓'));
+    global._pgPool.on('connect', () => log('Connected'));
     global._pgPool.on('error', (err) => console.error('[DB] Pool error:', err));
   }
 }
@@ -37,7 +37,7 @@ export async function query<T = any>(sql: string, params?: any[]): Promise<T[]> 
       connectionString: cleaned,
       ssl: { rejectUnauthorized: false },
     });
-    global._pgPool.on('connect', () => log('Connected ✓'));
+    global._pgPool.on('connect', () => log('Connected'));
     global._pgPool.on('error', (err) => console.error('[DB] Pool error:', err));
   }
   log(sql.trim().split('\n')[0], params ?? '');

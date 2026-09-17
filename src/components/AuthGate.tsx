@@ -12,6 +12,20 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
   const [isRegistering, setIsRegistering] = useState(false);
 
   useEffect(() => {
+    const palettes = [
+      { page: '#e8edf7', darkPage: '#111827', nav: '#243b66', accent: '#4f6fb5', accentDark: '#89a7e8', success: '#277a62' },
+      { page: '#f1e8df', darkPage: '#211815', nav: '#6b3f32', accent: '#b26042', accentDark: '#e7a07e', success: '#38745b' },
+      { page: '#e7f0eb', darkPage: '#101d1a', nav: '#24594d', accent: '#3f8b76', accentDark: '#80c8ad', success: '#2f7659' },
+      { page: '#eee8f5', darkPage: '#1a1425', nav: '#513d75', accent: '#8062b2', accentDark: '#bba2e2', success: '#397a6a' },
+    ];
+    const palette = palettes[Math.floor(Math.random() * palettes.length)];
+    const root = document.documentElement;
+    root.style.setProperty('--palette-page', palette.page);
+    root.style.setProperty('--palette-dark-page', palette.darkPage);
+    root.style.setProperty('--palette-nav', palette.nav);
+    root.style.setProperty('--palette-accent', palette.accent);
+    root.style.setProperty('--palette-accent-dark', palette.accentDark);
+    root.style.setProperty('--palette-success', palette.success);
     checkSession();
   }, []);
 
@@ -98,7 +112,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
 
   if (loading && !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#ded9ed]">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--palette-page)]">
         <Loader2 className="w-12 h-12 text-[#6c40d6] animate-spin" />
       </div>
     );
@@ -106,10 +120,10 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
 
   if (user && !user.authenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#ded9ed] p-5 font-sans">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--palette-page)] p-5 font-sans">
         <div className="max-w-md w-full bg-white border-[4px] border-black rounded-3xl p-8 shadow-[8px_8px_0_#000]">
           <div className="flex flex-col items-center mb-8">
-            <div className="w-20 h-20 bg-[#6c40d6] rounded-2xl border-[3px] border-black flex items-center justify-center text-white mb-4 shadow-[4px_4px_0_#000]">
+            <div className="w-20 h-20 bg-[var(--palette-accent)] rounded-2xl border-[3px] border-black flex items-center justify-center text-white mb-4 shadow-[4px_4px_0_#000]">
               <Fingerprint size={48} strokeWidth={2.5} />
             </div>
             <h1 className="text-3xl font-black tracking-tighter uppercase text-center leading-none">
@@ -142,7 +156,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
                 <button
                   onClick={handleRegister}
                   disabled={loading}
-                  className="w-full bg-[#6c40d6] text-white py-4 rounded-xl border-[4px] border-black font-black text-xl flex items-center justify-center gap-2 shadow-[4px_4px_0_#000] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all"
+                  className="w-full bg-[var(--palette-accent)] text-white py-4 rounded-xl border-[4px] border-black font-black text-xl flex items-center justify-center gap-2 shadow-[4px_4px_0_#000] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all"
                 >
                   {loading ? <Loader2 className="animate-spin" /> : <><UserPlus /> Crear Passkey</>}
                 </button>
@@ -176,7 +190,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
           </div>
 
           <p className="mt-8 text-[10px] text-center font-bold text-slate-400 uppercase tracking-widest px-4">
-            Sin correos. Sin contraseñas. Solo tu dispositivo. 🛡️
+            Sin correos. Sin contraseñas. Solo tu dispositivo.
           </p>
         </div>
       </div>
