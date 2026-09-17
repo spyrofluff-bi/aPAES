@@ -97,7 +97,7 @@ export default function AddExamModal({ isOpen, onClose, onSaveExam, dark }: AddE
           className={`flex items-center justify-center gap-2 px-8 py-4 text-xl font-black border-[4px] border-black rounded-2xl transition-all active:translate-y-1 active:shadow-none w-full mt-2
             ${saved ? "bg-emerald-500 text-white border-emerald-700" : "bg-[#6c40d6] hover:bg-[#5b3eb8] text-white shadow-[4px_4px_0_#000]"}`}
         >
-          {saved ? "✓ ¡GUARDADO!" : <><Plus size={24} strokeWidth={3} /> GUARDAR EN MIS ENSAYOS</>}
+          {saved ? "¡GUARDADO!" : <><Plus size={24} strokeWidth={3} /> GUARDAR EN MIS ENSAYOS</>}
         </button>
       </div>
     </div>

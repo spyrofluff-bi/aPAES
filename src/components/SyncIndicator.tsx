@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function SyncIndicator({ status, isOnline, dark }: Props) {
-  const base = `flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-lg border-2 transition-all select-none`;
+  const base = `flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-none border-2 transition-all select-none`;
 
   if (!isOnline || status === 'offline') {
     return (

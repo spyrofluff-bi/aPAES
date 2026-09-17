@@ -10,13 +10,13 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 const bowlbyOne = Bowlby_One({ weight: "400", subsets: ["latin"], variable: "--font-bowlby" });
 
 export const metadata: Metadata = {
-  title: "aPAES | Entrenamiento Inteligente",
-  description: "Procesa tus PDFs de ensayos PAES y prepárate con herramientas digitales avanzadas.",
+    title: "Panel de estudio",
+  description: "Organiza tus ensayos, practica y revisa tu progreso.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "aPAES",
+    title: "Panel de estudio",
   },
   formatDetection: {
     telephone: false,
