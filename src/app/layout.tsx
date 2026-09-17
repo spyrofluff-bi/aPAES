@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Outfit, Bowlby_One } from "next/font/google";
 import "./globals.css";
 import AuthGate from "../components/AuthGate";
@@ -10,9 +10,45 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 const bowlbyOne = Bowlby_One({ weight: "400", subsets: ["latin"], variable: "--font-bowlby" });
 
 export const metadata: Metadata = {
-    title: "Panel de estudio",
-  description: "Organiza tus ensayos, practica y revisa tu progreso.",
+  title: {
+    default: "Panel de estudio",
+    template: "%s | Panel de estudio",
+  },
+  description: "Organiza tus ensayos, practica y revisa tu progreso con un panel de estudio sencillo.",
+  keywords: ["estudio", "ensayos", "práctica", "progreso académico", "exámenes"],
+  applicationName: "Panel de estudio",
+  authors: [{ name: "Panel de estudio" }],
+  creator: "Panel de estudio",
+  publisher: "Panel de estudio",
+  category: "education",
   manifest: "/manifest.json",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "es_ES",
+    url: "/",
+    siteName: "Panel de estudio",
+    title: "Panel de estudio",
+    description: "Organiza tus ensayos, practica y revisa tu progreso.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Panel de estudio",
+    description: "Organiza tus ensayos, practica y revisa tu progreso.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -24,6 +60,13 @@ export const metadata: Metadata = {
   other: {
     "mobile-web-app-capable": "yes",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#dadaec",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
